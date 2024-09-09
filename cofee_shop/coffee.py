@@ -12,18 +12,19 @@ class Coffee:
         return self._name
 
     def orders(self):
-        return [order for order in self._orders if isinstance(order, Order) and order.coffee == self]
+        return self._orders  
 
     def customers(self):
-        return list(set(order.customer for order in self.orders()))
+        return list(set(order.customer for order in self._orders))  
 
     def num_orders(self):
-        return len(self.orders())
+        return len(self._orders)  
 
     def average_price(self):
-        total_price = sum(order.price for order in self.orders())
-        return total_price / len(self.orders()) if self.orders() else 0.0
+        total_price = sum(order.price for order in self._orders)
+        return total_price / len(self._orders) if self._orders else 0.0  
 
     def add_order(self, order):
+        
         if isinstance(order, Order) and order.coffee == self:
             self._orders.append(order)
